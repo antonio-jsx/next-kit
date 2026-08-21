@@ -8,9 +8,13 @@
     "start": "next start",
     "lint": "biome check",
     "format": "biome check --write",
-    "prepare": "husky"
+    "prepare": "husky",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push"
   },
   "dependencies": {
+    "drizzle-kit": "^0.31.10",
     "next": "16.3.1",
     "react": "19.2.8",
     "react-dom": "19.2.8"
@@ -22,8 +26,11 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "babel-plugin-react-compiler": "1.0.0",
+    "dotenv": "^17.4.2",
+    "drizzle-orm": "^0.45.2",
     "husky": "^9.1.7",
     "lint-staged": "^17.3.0",
+    "postgres": "^3.4.9",
     "tailwindcss": "^4",
     "typescript": "^5"
   },
