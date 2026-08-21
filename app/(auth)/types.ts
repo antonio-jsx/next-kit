@@ -1,4 +1,4 @@
-import * as z from "zod";
+import { z } from "@/lib/zod";
 
 export const loginSchema = z.object({
   email: z.email("Ingresa un correo valido").min(1, "Ingresa un correo"),
