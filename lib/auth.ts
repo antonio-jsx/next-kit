@@ -1,3 +1,4 @@
+import { i18n, locales } from "@better-auth/i18n";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { betterAuth } from "better-auth/minimal";
 import { nextCookies } from "better-auth/next-js";
@@ -28,5 +29,5 @@ export const auth = betterAuth({
     max: 10, // max requests per window per IP
     storage: "memory",
   },
-  plugins: [nextCookies()],
+  plugins: [i18n({ translations: { es: locales.es } }), nextCookies()],
 });

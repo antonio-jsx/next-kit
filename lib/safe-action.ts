@@ -1,9 +1,10 @@
 import { betterAuth } from "@next-safe-action/adapter-better-auth";
-import { createSafeActionClient, DEFAULT_SERVER_ERROR_MESSAGE } from "next-safe-action";
+import { createSafeActionClient } from "next-safe-action";
 import * as z from "zod";
 import { auth } from "@/lib/auth";
 
 export class ActionError extends Error {}
+const DEFAULT_SERVER_ERROR_MESSAGE = "Algo salió mal al ejecutar la operación.";
 
 export const actionClient = createSafeActionClient({
   handleServerError(error) {
@@ -24,7 +25,7 @@ export const safeAction = actionClient.use(
   betterAuth(auth, {
     authorize: ({ authData, next }) => {
       if (!authData) {
-        throw new ActionError("FORBIDDEN");
+        throw new ActionError("PROHIBIDO");
       }
       return next({
         ctx: {
