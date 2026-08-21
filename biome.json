@@ -35,6 +35,7 @@
   },
   "linter": {
     "enabled": true,
+    "includes": ["**", "!**/ui/**"],
     "rules": {
       "preset": "recommended",
       "nursery": {
