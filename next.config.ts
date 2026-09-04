@@ -6,6 +6,9 @@ import "@/env/client";
 const nextConfig: NextConfig = {
   reactCompiler: true,
   typedRoutes: true,
+  experimental: {
+    useTypeScriptCli: false,
+  },
 };
 
 export default nextConfig;
