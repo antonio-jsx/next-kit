@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
-import "@/env/server";
-import "@/env/client";
+import "@/lib/env/server";
+import "@/lib/env/client";
 
 const nextConfig: NextConfig = {
   reactCompiler: true,

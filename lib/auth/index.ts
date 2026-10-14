@@ -1,8 +1,8 @@
 import { i18n, locales } from "@better-auth/i18n";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { betterAuth } from "better-auth/minimal";
-import { env } from "@/env/server";
 import { db } from "@/lib/db";
+import { env } from "@/lib/env/server";
 
 const trustedOrigins = [env.CORS_ORIGIN, "http://localhost:3000", "http://127.0.0.1:3000"].filter(
   Boolean,
