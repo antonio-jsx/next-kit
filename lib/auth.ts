@@ -1,34 +1,59 @@
 import { i18n, locales } from "@better-auth/i18n";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { betterAuth } from "better-auth/minimal";
-import { nextCookies } from "better-auth/next-js";
+import { env } from "@/env/server";
 import { db } from "@/lib/db";
 
+const trustedOrigins = [env.CORS_ORIGIN, "http://localhost:3000", "http://127.0.0.1:3000"].filter(
+  Boolean,
+) as string[];
+
 export const auth = betterAuth({
-  database: drizzleAdapter(db, { provider: "pg", usePlural: true, camelCase: true }),
+  database: drizzleAdapter(db, { provider: "pg", usePlural: true }),
   advanced: {
-    database: {
-      joins: true,
+    database: { joins: true },
+    useSecureCookies: env.NODE_ENV === "production",
+    ipAddress: {
+      trustedProxies: ["127.0.0.1", "::1"],
     },
   },
+  trustedOrigins,
   baseURL: {
-    allowedHosts: ["localhost:*"],
+    allowedHosts: [env.BETTER_AUTH_URL],
+    protocol: env.NODE_ENV === "development" ? "http" : "https",
   },
-  emailAndPassword: { enabled: true },
   session: {
-    expiresIn: 60 * 60 * 24 * 7, // 7 days
-    updateAge: 60 * 60 * 24, // 24 hours
+    expiresIn: 60 * 60 * 24 * 7,
+    updateAge: 60 * 60 * 24,
     cookieCache: {
       enabled: true,
-      maxAge: 1 * 60 * 60 * 24 * 7, // 7 days
-      strategy: "jwt",
+      maxAge: 60 * 5,
     },
   },
   rateLimit: {
     enabled: true,
-    window: 60, // seconds
-    max: 10, // max requests per window per IP
+    window: 60,
+    max: 100,
     storage: "memory",
+    customRules: {
+      "/sign-in/email": { window: 60, max: 5 },
+      "/sign-up/email": { window: 60, max: 5 },
+      "/reset-password": { window: 60, max: 3 },
+      "/verify-email": { window: 60, max: 10 },
+    },
   },
-  plugins: [i18n({ translations: { es: locales.es } }), nextCookies()],
+  emailAndPassword: {
+    enabled: true,
+    minPasswordLength: 8,
+    maxPasswordLength: 128,
+    revokeSessionsOnPasswordReset: true,
+  },
+  plugins: [
+    i18n({
+      translations: {
+        es: locales.es,
+      },
+      defaultLocale: "es",
+    }),
+  ],
 });
