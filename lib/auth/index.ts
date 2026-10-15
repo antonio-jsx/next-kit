@@ -1,12 +1,9 @@
 import { i18n, locales } from "@better-auth/i18n";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { betterAuth } from "better-auth/minimal";
+import { getAppUrl } from "@/lib/config";
 import { db } from "@/lib/db";
 import { env } from "@/lib/env/server";
-
-const trustedOrigins = [env.CORS_ORIGIN, "http://localhost:3000", "http://127.0.0.1:3000"].filter(
-  Boolean,
-) as string[];
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, { provider: "pg", usePlural: true }),
@@ -17,7 +14,7 @@ export const auth = betterAuth({
       trustedProxies: ["127.0.0.1", "::1"],
     },
   },
-  trustedOrigins,
+  trustedOrigins: [getAppUrl()],
   baseURL: {
     allowedHosts: [env.BETTER_AUTH_URL],
     protocol: env.NODE_ENV === "development" ? "http" : "https",
