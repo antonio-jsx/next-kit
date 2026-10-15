@@ -6,6 +6,8 @@ import "@/lib/env/client";
 const nextConfig: NextConfig = {
   reactCompiler: true,
   typedRoutes: true,
+  cacheComponents: true,
+  partialPrefetching: true,
   experimental: {
     useTypeScriptCli: false,
   },
