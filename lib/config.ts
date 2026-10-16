@@ -1,6 +1,6 @@
-import { env } from "./env/server";
+import { env } from "@/lib/env/server";
 
-export const APP_NAME = "";
+export const APP_NAME = "Next-Kit";
 export const URL_LOCALE = "http://localhost:3000";
 
 export function getAppUrl() {
