@@ -3,10 +3,11 @@ import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { betterAuth } from "better-auth/minimal";
 import { getAppUrl } from "@/lib/config";
 import { db } from "@/lib/db";
+import * as schema from "@/lib/db/schemas/users";
 import { env } from "@/lib/env/server";
 
 export const auth = betterAuth({
-  database: drizzleAdapter(db, { provider: "pg", usePlural: true }),
+  database: drizzleAdapter(db, { provider: "pg", usePlural: true, schema }),
   advanced: {
     database: { joins: true },
     useSecureCookies: env.NODE_ENV === "production",
