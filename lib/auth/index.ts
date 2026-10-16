@@ -1,6 +1,7 @@
 import { i18n, locales } from "@better-auth/i18n";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { betterAuth } from "better-auth/minimal";
+import { nextCookies } from "better-auth/next-js";
 import { getAppUrl } from "@/lib/config";
 import { db } from "@/lib/db";
 import * as schema from "@/lib/db/schemas/users";
@@ -53,5 +54,6 @@ export const auth = betterAuth({
       },
       defaultLocale: "es",
     }),
+    nextCookies(),
   ],
 });
