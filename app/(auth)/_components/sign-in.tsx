@@ -1,6 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { loginSchema } from "@/app/(auth)/types";
 import { FormField } from "@/components/form-field";
@@ -34,26 +35,67 @@ export function SignIn() {
   });
 
   return (
-    <form className="space-y-3" onSubmit={onSubmit}>
-      <FormField
-        control={control}
-        label="Correo"
-        name="email"
-        render={(field) => <Input type="email" {...field} />}
-      />
+    <div className="w-full max-w-sm rounded-xl border bg-card p-5 sm:p-8">
+      <div className="mb-4">
+        <p className="font-medium text-muted-foreground text-xs uppercase tracking-[0.22em]">
+          Acceso
+        </p>
+        <h2 className="mt-1 font-semibold text-foreground text-xl tracking-tight">
+          Iniciar sesión
+        </h2>
+      </div>
 
-      <FormField
-        control={control}
-        label="Contraseña"
-        name="password"
-        render={(field) => <Input placeholder="••••••••" type="password" {...field} />}
-      />
+      <form className="space-y-4" onSubmit={onSubmit}>
+        <FormField
+          control={control}
+          label="Correo"
+          name="email"
+          render={(field) => (
+            <Input
+              {...field}
+              autoComplete="email"
+              placeholder="tu@correo.com"
+              spellCheck={false}
+              type="email"
+            />
+          )}
+        />
 
-      {errors.root && <p className="text-red-500 text-sm">{errors.root.message}</p>}
+        <FormField
+          control={control}
+          label="Contraseña"
+          name="password"
+          render={(field) => (
+            <Input
+              {...field}
+              autoComplete="current-password"
+              placeholder="••••••••"
+              spellCheck={false}
+              type="password"
+            />
+          )}
+        />
 
-      <Button disabled={isSubmitting} type="submit">
-        Acceder
-      </Button>
-    </form>
+        {errors.root && (
+          <p aria-live="polite" className="font-medium text-destructive text-sm">
+            {errors.root.message}
+          </p>
+        )}
+
+        <Button className="w-full" disabled={isSubmitting} type="submit">
+          {isSubmitting ? "Accediendo..." : "Acceder"}
+        </Button>
+      </form>
+
+      <p className="mt-6 text-center text-muted-foreground text-sm">
+        ¿No tienes cuenta?{" "}
+        <Link
+          className="font-semibold text-primary transition-colors hover:text-primary/80"
+          href="/registro"
+        >
+          Crear una cuenta
+        </Link>
+      </p>
+    </div>
   );
 }
