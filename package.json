@@ -19,6 +19,7 @@
     "@hookform/resolvers": "^5.9.1",
     "@next-safe-action/adapter-better-auth": "^0.1.7",
     "@next-safe-action/adapter-react-hook-form": "^2.1.0",
+    "@next/third-parties": "^16.4.2",
     "@t3-oss/env-nextjs": "^0.13.11",
     "better-auth": "^1.7.10",
     "class-variance-authority": "^0.7.1",
