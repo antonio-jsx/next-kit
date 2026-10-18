@@ -76,6 +76,13 @@ export function SignIn() {
           )}
         />
 
+        <Link
+          className="mb-2 inline-block text-primary text-sm transition-colors hover:text-primary/80"
+          href="/password-reset"
+        >
+          ¿Olvidaste tu contraseña?
+        </Link>
+
         {errors.root && (
           <p aria-live="polite" className="font-medium text-destructive text-sm">
             {errors.root.message}

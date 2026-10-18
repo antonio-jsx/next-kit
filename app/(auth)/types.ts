@@ -14,3 +14,7 @@ export const registerSchema = loginSchema
     message: "Las contraseñas no coinciden",
     path: ["passwordRepeat"],
   });
+
+export const resetSchema = loginSchema.pick({ email: true });
+
+export const changeSchema = loginSchema.extend({ otp: z.string().min(1).max(6) });
