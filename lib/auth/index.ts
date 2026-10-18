@@ -2,6 +2,7 @@ import { i18n, locales } from "@better-auth/i18n";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { betterAuth } from "better-auth/minimal";
 import { nextCookies } from "better-auth/next-js";
+import { emailOTP } from "better-auth/plugins";
 import { getAppUrl } from "@/lib/config";
 import { db } from "@/lib/db";
 import * as schema from "@/lib/db/schemas/users";
@@ -48,9 +49,22 @@ export const auth = betterAuth({
     revokeSessionsOnPasswordReset: true,
   },
   plugins: [
+    emailOTP({
+      allowedAttempts: 5,
+      async sendVerificationOTP({ email, otp, type }) {
+        if (type === "forget-password") {
+          // Send the OTP for password reset
+          console.log(otp);
+        }
+      },
+    }),
     i18n({
       translations: {
-        es: locales.es,
+        es: {
+          ...locales.es,
+          INVALID_OTP: "Código inválido",
+          TOO_MANY_ATTEMPTS: "tines que esperate wey",
+        },
       },
       defaultLocale: "es",
     }),
