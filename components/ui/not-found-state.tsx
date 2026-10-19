@@ -3,14 +3,14 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "./button";
 
-export function NotFoundState<T extends string>({
+export function NotFoundState({
   body,
   title = "404 — Página no encontrada",
   link = "/",
 }: {
   body: string;
   title?: string;
-  link?: Route<T> | URL;
+  link?: Route;
 }) {
   return (
     <div className="flex flex-col gap-2 max-w-md">
