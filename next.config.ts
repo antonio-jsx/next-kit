@@ -11,6 +11,7 @@ const nextConfig: NextConfig = {
   partialPrefetching: true,
   experimental: {
     useTypeScriptCli: false,
+    turbopackServerFastRefresh: false,
   },
 };
 
