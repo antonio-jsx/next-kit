@@ -1,0 +1,6 @@
+minimumReleaseAge: 2880
+minimumReleaseAgeExclude:
+  - '@next/*'
+  - next
+allowBuilds:
+  esbuild: true
