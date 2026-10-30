@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import Link from "next/link";
-import { useForm } from "react-hook-form";
-import { registerSchema } from "@/app/(auth)/types";
-import { FormField } from "@/components/form-field";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { authClient } from "@/lib/auth/client";
+import { zodResolver } from '@hookform/resolvers/zod';
+import Link from 'next/link';
+import { useForm } from 'react-hook-form';
+import { registerSchema } from '@/app/(auth)/types';
+import { FormField } from '@/components/form-field';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { authClient } from '@/lib/auth/client';
 
 export function SignUp() {
   const {
@@ -18,7 +18,7 @@ export function SignUp() {
     formState: { isSubmitSuccessful, isSubmitting, errors },
   } = useForm({
     resolver: zodResolver(registerSchema),
-    defaultValues: { email: "", password: "", fullName: "", passwordRepeat: "" },
+    defaultValues: { email: '', password: '', fullName: '', passwordRepeat: '' },
   });
 
   const onSubmit = handleSubmit(async (data) => {
@@ -26,11 +26,11 @@ export function SignUp() {
       name: data.fullName,
       email: data.email,
       password: data.password,
-      callbackURL: "/dashboard",
+      callbackURL: '/dashboard',
     });
 
     if (error) {
-      setError("root", { type: "server", message: error.message });
+      setError('root', { type: 'server', message: error.message });
       return;
     }
     reset();
@@ -39,10 +39,10 @@ export function SignUp() {
   return (
     <div className="w-full max-w-sm rounded-xl border bg-card p-5 sm:p-8">
       <div className="mb-4">
-        <p className="font-medium text-muted-foreground text-xs uppercase tracking-[0.22em]">
+        <p className="text-xs font-medium tracking-[0.22em] text-muted-foreground uppercase">
           Registro
         </p>
-        <h2 className="mt-1 font-semibold text-foreground text-xl tracking-tight">Crear cuenta</h2>
+        <h2 className="mt-1 text-xl font-semibold tracking-tight text-foreground">Crear cuenta</h2>
       </div>
 
       <form className="space-y-4" onSubmit={onSubmit}>
@@ -101,25 +101,25 @@ export function SignUp() {
         />
 
         {errors.root && (
-          <p aria-live="polite" className="font-medium text-destructive text-sm">
+          <p aria-live="polite" className="text-sm font-medium text-destructive">
             {errors.root.message}
           </p>
         )}
         {isSubmitSuccessful && (
-          <p aria-live="polite" className="font-medium text-emerald-600 text-sm">
+          <p aria-live="polite" className="text-sm font-medium text-emerald-600">
             Usuario creado con éxito.
           </p>
         )}
 
         <div className="pt-1">
           <Button className="w-full" disabled={isSubmitting} type="submit">
-            {isSubmitting ? "Creando cuenta..." : "Crear cuenta"}
+            {isSubmitting ? 'Creando cuenta...' : 'Crear cuenta'}
           </Button>
         </div>
       </form>
 
-      <p className="mt-6 text-center text-muted-foreground text-sm">
-        ¿Ya tienes cuenta?{" "}
+      <p className="mt-6 text-center text-sm text-muted-foreground">
+        ¿Ya tienes cuenta?{' '}
         <Link
           className="font-semibold text-primary transition-colors hover:text-primary/80"
           href="/login"

@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { Loader2 } from "lucide-react";
-import { catchError, type ErrorInfo } from "next/error";
-import { useTransition } from "react";
-import { Button } from "@/components/ui/button";
-import { ErrorState } from "@/components/ui/error-state";
+import { Loader2 } from 'lucide-react';
+import { catchError, type ErrorInfo } from 'next/error';
+import { useTransition } from 'react';
+import { Button } from '@/components/ui/button';
+import { ErrorState } from '@/components/ui/error-state';
 
 function ErrorFallback(props: { className?: string; title?: string }, { retry }: ErrorInfo) {
   const [isPending, startTransition] = useTransition();
@@ -13,7 +13,7 @@ function ErrorFallback(props: { className?: string; title?: string }, { retry }:
     <ErrorState
       body="No se ha podido cargar esta sección."
       className={props.className}
-      title={props.title ?? "Algo salió mal"}
+      title={props.title ?? 'Algo salió mal'}
     >
       <Button
         aria-busy={isPending}
@@ -23,7 +23,7 @@ function ErrorFallback(props: { className?: string; title?: string }, { retry }:
         variant="secondary"
       >
         {isPending && <Loader2 className="animate-spin" />}
-        {isPending ? "Reintentando…" : "Intentar otra vez"}
+        {isPending ? 'Reintentando…' : 'Intentar otra vez'}
       </Button>
     </ErrorState>
   );

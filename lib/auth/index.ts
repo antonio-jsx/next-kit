@@ -1,26 +1,26 @@
-import { i18n, locales } from "@better-auth/i18n";
-import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { betterAuth } from "better-auth/minimal";
-import { nextCookies } from "better-auth/next-js";
-import { emailOTP } from "better-auth/plugins";
-import { getAppUrl } from "@/lib/config";
-import { db } from "@/lib/db";
-import * as schema from "@/lib/db/schemas/users";
-import { env } from "@/lib/env/server";
+import { i18n, locales } from '@better-auth/i18n';
+import { drizzleAdapter } from 'better-auth/adapters/drizzle';
+import { betterAuth } from 'better-auth/minimal';
+import { nextCookies } from 'better-auth/next-js';
+import { emailOTP } from 'better-auth/plugins';
+import { getAppUrl } from '@/lib/config';
+import { db } from '@/lib/db';
+import * as schema from '@/lib/db/schemas/users';
+import { env } from '@/lib/env/server';
 
 export const auth = betterAuth({
-  database: drizzleAdapter(db, { provider: "pg", usePlural: true, schema }),
+  database: drizzleAdapter(db, { provider: 'pg', usePlural: true, schema }),
   advanced: {
     database: { joins: true },
-    useSecureCookies: env.NODE_ENV === "production",
+    useSecureCookies: env.NODE_ENV === 'production',
     ipAddress: {
-      trustedProxies: ["127.0.0.1", "::1"],
+      trustedProxies: ['127.0.0.1', '::1'],
     },
   },
   trustedOrigins: [getAppUrl()],
   baseURL: {
     allowedHosts: [env.BETTER_AUTH_URL],
-    protocol: env.NODE_ENV === "development" ? "http" : "https",
+    protocol: env.NODE_ENV === 'development' ? 'http' : 'https',
   },
   session: {
     expiresIn: 60 * 60 * 24 * 7,
@@ -34,12 +34,12 @@ export const auth = betterAuth({
     enabled: true,
     window: 60,
     max: 100,
-    storage: "memory",
+    storage: 'memory',
     customRules: {
-      "/sign-in/email": { window: 60, max: 5 },
-      "/sign-up/email": { window: 60, max: 5 },
-      "/reset-password": { window: 60, max: 3 },
-      "/verify-email": { window: 60, max: 10 },
+      '/sign-in/email': { window: 60, max: 5 },
+      '/sign-up/email': { window: 60, max: 5 },
+      '/reset-password': { window: 60, max: 3 },
+      '/verify-email': { window: 60, max: 10 },
     },
   },
   emailAndPassword: {
@@ -52,7 +52,7 @@ export const auth = betterAuth({
     emailOTP({
       allowedAttempts: 5,
       async sendVerificationOTP({ email, otp, type }) {
-        if (type === "forget-password") {
+        if (type === 'forget-password') {
           // Send the OTP for password reset
           console.log(otp);
         }
@@ -62,11 +62,11 @@ export const auth = betterAuth({
       translations: {
         es: {
           ...locales.es,
-          INVALID_OTP: "Código inválido",
-          TOO_MANY_ATTEMPTS: "tines que esperate wey",
+          INVALID_OTP: 'Código inválido',
+          TOO_MANY_ATTEMPTS: 'tines que esperate wey',
         },
       },
-      defaultLocale: "es",
+      defaultLocale: 'es',
     }),
     nextCookies(),
   ],

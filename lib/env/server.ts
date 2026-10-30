@@ -1,6 +1,6 @@
-import { vercel } from "@t3-oss/env-core/presets-zod";
-import { createEnv } from "@t3-oss/env-nextjs";
-import * as z from "zod";
+import { vercel } from '@t3-oss/env-core/presets-zod';
+import { createEnv } from '@t3-oss/env-nextjs';
+import * as z from 'zod';
 
 export const env = createEnv({
   server: {
@@ -11,7 +11,7 @@ export const env = createEnv({
     RESEND_API_KEY: z.string().min(1),
     UPSTASH_REDIS_REST_URL: z.url().optional(),
     UPSTASH_REDIS_REST_TOKEN: z.string().optional(),
-    NODE_ENV: z.enum(["development", "production", "test"]).default("development"),
+    NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
   },
   extends: [vercel()],
   experimental__runtimeEnv: process.env,

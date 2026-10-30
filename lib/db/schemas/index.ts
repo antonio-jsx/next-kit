@@ -1,1 +1,1 @@
-export * from "@/lib/db/schemas/users";
+export * from '@/lib/db/schemas/users';

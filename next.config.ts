@@ -1,7 +1,7 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
-import "@/lib/env/server";
-import "@/lib/env/client";
+import '@/lib/env/server';
+import '@/lib/env/client';
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,

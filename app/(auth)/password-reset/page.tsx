@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
-import { PasswordReset } from "../_components/password-reset";
+import type { Metadata } from 'next';
+import { PasswordReset } from '../_components/password-reset';
 
 export const metadata: Metadata = {
-  title: "Restablecer contraseña",
+  title: 'Restablecer contraseña',
 };
 
 export default function Reset() {

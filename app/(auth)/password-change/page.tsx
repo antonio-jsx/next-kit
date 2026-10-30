@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
-import { PasswordChange } from "../_components/password-change";
+import type { Metadata } from 'next';
+import { PasswordChange } from '../_components/password-change';
 
 export const metadata: Metadata = {
-  title: "Cambiar contraseña",
+  title: 'Cambiar contraseña',
 };
 
 export default function Change() {

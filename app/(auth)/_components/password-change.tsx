@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { FormField } from "@/components/form-field";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { authClient } from "@/lib/auth/client";
-import { changeSchema } from "../types";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { FormField } from '@/components/form-field';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { authClient } from '@/lib/auth/client';
+import { changeSchema } from '../types';
 
 export function PasswordChange() {
   const {
@@ -16,7 +16,7 @@ export function PasswordChange() {
     formState: { isSubmitting, isSubmitSuccessful, errors },
   } = useForm({
     resolver: zodResolver(changeSchema),
-    defaultValues: { email: "", otp: "", password: "" },
+    defaultValues: { email: '', otp: '', password: '' },
   });
 
   const onSubmit = handleSubmit(async (data) => {
@@ -27,7 +27,7 @@ export function PasswordChange() {
     });
 
     if (error) {
-      setError("root", { type: "server", message: error.message });
+      setError('root', { type: 'server', message: error.message });
       return;
     }
   });
@@ -35,15 +35,15 @@ export function PasswordChange() {
   return (
     <div className="w-full max-w-sm rounded-xl border bg-card p-5 sm:p-8">
       <div className="mb-4">
-        <p className="font-medium text-muted-foreground text-xs uppercase tracking-[0.22em]">
+        <p className="text-xs font-medium tracking-[0.22em] text-muted-foreground uppercase">
           Seguridad
         </p>
-        <h2 className="mt-1 font-semibold text-foreground text-xl tracking-tight">
+        <h2 className="mt-1 text-xl font-semibold tracking-tight text-foreground">
           Actualizar contraseña
         </h2>
       </div>
 
-      <p className="mb-4 text-muted-foreground text-sm">
+      <p className="mb-4 text-sm text-muted-foreground">
         Introduce tu correo, el código recibido y la nueva contraseña para terminar la recuperación.
       </p>
 
@@ -88,19 +88,19 @@ export function PasswordChange() {
         />
 
         {errors.root && (
-          <p aria-live="polite" className="font-medium text-destructive text-sm">
+          <p aria-live="polite" className="text-sm font-medium text-destructive">
             {errors.root.message}
           </p>
         )}
 
         {isSubmitSuccessful && (
-          <p aria-live="polite" className="font-medium text-emerald-600 text-sm">
+          <p aria-live="polite" className="text-sm font-medium text-emerald-600">
             Contraseña actualizada con éxito.
           </p>
         )}
 
         <Button className="w-full" disabled={isSubmitting} type="submit">
-          {isSubmitting ? "Guardando..." : "Guardar contraseña"}
+          {isSubmitting ? 'Guardando...' : 'Guardar contraseña'}
         </Button>
       </form>
     </div>

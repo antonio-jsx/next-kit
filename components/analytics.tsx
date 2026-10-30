@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { GoogleAnalytics, sendGAEvent } from "@next/third-parties/google";
-import { env } from "@/lib/env/client";
-import { z } from "@/lib/zod";
+import { GoogleAnalytics, sendGAEvent } from '@next/third-parties/google';
+import { env } from '@/lib/env/client';
+import { z } from '@/lib/zod';
 
 const eventNameSchema = z
   .string()
@@ -27,11 +27,11 @@ function track(event: string, options: TrackOptions = {}) {
   const parsedEvent = eventNameSchema.safeParse(event);
 
   if (!parsedEvent.success) {
-    console.error("[track] Invalid event name:", parsedEvent.error.issues);
+    console.error('[track] Invalid event name:', parsedEvent.error.issues);
     return;
   }
 
-  sendGAEvent("event", parsedEvent.data, options);
+  sendGAEvent('event', parsedEvent.data, options);
 }
 
 export { Google, track };
