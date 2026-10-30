@@ -1,4 +1,4 @@
-import { vercel } from '@t3-oss/env-core/presets-zod';
+import { vercel } from '@t3-oss/env-nextjs/presets-zod';
 import { createEnv } from '@t3-oss/env-nextjs';
 import * as z from 'zod';
 

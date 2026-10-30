@@ -1,5 +1,5 @@
 import { createEnv } from '@t3-oss/env-nextjs';
-import { z } from '@/lib/zod';
+import * as z from 'zod';
 
 export const env = createEnv({
   client: { NEXT_PUBLIC_GAID: z.string().optional() },
