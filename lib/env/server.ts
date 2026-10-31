@@ -11,6 +11,10 @@ export const env = createEnv({
     RESEND_API_KEY: z.string().min(1),
     UPSTASH_REDIS_REST_URL: z.url().optional(),
     UPSTASH_REDIS_REST_TOKEN: z.string().optional(),
+    LOG_LEVEL: z
+      .enum(['fatal', 'error', 'warn', 'info', 'debug', 'trace'])
+      .optional()
+      .default('info'),
     NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
   },
   extends: [vercel()],
