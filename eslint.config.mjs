@@ -1,14 +1,15 @@
 import { fileURLToPath } from 'node:url';
 import { defineConfig, includeIgnoreFile } from 'eslint/config';
 import nextConfig from 'eslint-config-next';
-import eslintConfigPrettier from 'eslint-config-prettier';
+import eslintConfigPrettier from 'eslint-config-prettier/flat';
+import unusedImports from 'eslint-plugin-unused-imports';
 
 const gitignorePath = fileURLToPath(new URL('.gitignore', import.meta.url));
 
 export default defineConfig([
-  includeIgnoreFile(gitignorePath, { gitignoreResolution: true }),
   ...nextConfig,
   eslintConfigPrettier,
+  includeIgnoreFile(gitignorePath, { gitignoreResolution: true }),
   {
     files: ['**/*.ts', '**/*.tsx'],
     rules: {
@@ -33,6 +34,24 @@ export default defineConfig([
         },
       ],
       'spaced-comment': 'warn',
+    },
+  },
+  {
+    plugins: {
+      'unused-imports': unusedImports,
+    },
+    rules: {
+      'no-unused-vars': 'off', // or "@typescript-eslint/no-unused-vars": "off",
+      'unused-imports/no-unused-imports': 'error',
+      'unused-imports/no-unused-vars': [
+        'warn',
+        {
+          vars: 'all',
+          varsIgnorePattern: '^_',
+          args: 'after-used',
+          argsIgnorePattern: '^_',
+        },
+      ],
     },
   },
 ]);
